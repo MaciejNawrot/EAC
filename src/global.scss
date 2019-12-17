@@ -30,3 +30,33 @@
   src: url('/assets/fonts/sifonn/SIFONN_PRO.woff') format('woff');
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+$color-friendly: #7ed957;
+$color-warning: #ff5757;
+$color-accent: #b8daef;
+$color-dark: #171717;
+$color-button: #5271ff;
+
+$color-font-normal: #000000;
+$color-font-bright: #ffffff;
+
+.btn {
+  width: 325px;
+  height: 72px;
+  font-family: 'Sifonn Pro';
+  font-size: 16px;
+  line-height: 16px;
+  background: $color-button;
+  border-radius: 10px;
+  color: $color-font-bright;
+  outline: none;
+}
+
+.nav-btn {
+
+}
+
+

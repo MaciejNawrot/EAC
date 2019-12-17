@@ -9,11 +9,19 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MeComponent } from './me/me.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent, MeComponent],
+  declarations: [
+    AppComponent,
+    MeComponent,
+    LandingComponent,
+  ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+      BrowserModule,
+      IonicModule.forRoot(),
+      AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,

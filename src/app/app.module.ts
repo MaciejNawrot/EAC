@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MeComponent } from './me/me.component';
 import { LandingComponent } from './landing/landing.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { LandingComponent } from './landing/landing.component';
   imports: [
       BrowserModule,
       IonicModule.forRoot(),
-      AppRoutingModule],
+      AppRoutingModule,
+      ReactiveFormsModule,
+  ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -14,7 +14,6 @@
             <div class="button-wrapper">
                 <button class="btn">DOWIEDZ SIĘ WIĘCEJ</button>
             </div>
-            <ion-button>xd</ion-button>
         </div>
         <div class="left"></div>
         <div class="top"></div>
@@ -22,56 +21,117 @@
     </header>
     <main>
         <div class="slider"></div>
-        <section class="car-cost">
-            <h3>OPŁATY TOWARZYSZĄCE ZAKUPOWI AUTA*</h3>
+        <div class="chips">
+            <div class="total-cost" *ngIf="totalReduction">
+                <div class="summary-text">CAŁKOWITY KOSZT:</div>
+                <div class="cost">{{totalReduction}} ZŁ</div>
+            </div>
+        </div>
+        <div class="container">
+            <section class="car-cost">
 
-            <div class="inputs-wrapper">
-                <div class="cost-input-wrapper">
-                    <ion-item>
-                        <ion-label position="floating"> Podaj wartość auta </ion-label>
-                        <ion-input required type="text"></ion-input>
-                    </ion-item>
+                <h3>OPŁATY TOWARZYSZĄCE ZAKUPOWI AUTA*</h3>
+                <div class="inputs-wrapper">
+
+                    <form [formGroup]="carDataForm" (ngSubmit)="setCarAccompanyingFees()">
+                        <div class="cost-input-wrapper">
+                            <ion-item>
+                                <ion-label position="floating"> Podaj wartość auta</ion-label>
+                                <ion-input type="number" formControlName="carCost">
+                                </ion-input>
+                            </ion-item>
+                        </div>
+
+                        <ion-item class="top-offset-small">
+                            <ion-checkbox color="dark" slot="start" formControlName="isOver2L"></ion-checkbox>
+                            <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>
+                        </ion-item>
+                        <div class="top-offset-mid">
+                            <button class="btn" type="submit">OBLICZ</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="capacity-checkbox-wrapper">
-                    <ion-item>
-                        <ion-checkbox color="dark" checked slot="start"></ion-checkbox>
-                        <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>
-                    </ion-item>
-                    <div class="button-margin">
-                        <ion-button>Oblicz</ion-button>
+            </section>
+            <section class="register-cost" *ngIf="carAccompanyingFees">
+                <h3>KOSZT SPROWADZENIA I REJESTRACJI AUTA*</h3>
+
+                <div class="cards">
+
+                    <div class="card friendly">
+                        <div class="header">
+                            CENA W <br>
+                            <span class="friendly-text">EURO AUTO CLUB</span>
+                        </div>
+                        <div class="summary">{{carAccompanyingFees.eac}} ZŁ</div>
                     </div>
 
+                    <div class="card warning">
+                        <div class="header">
+                            CENA W <br>
+                            <span class="warning-text">POLSCE</span>
+                        </div>
+                        <div class="summary">{{carAccompanyingFees.normal}} ZŁ</div>
+                    </div>
                 </div>
-            </div>
+            </section>
+            <section class="fuel-cost">
+                <h3>
+                    KARTY PALIWOWE, TANKUJESZ NAWET <span class="friendly-text">10% <br>
+                    TANIEJ </span>
+                </h3>
 
-        </section>
-        <section class="register-cost">
-            <h3>KOSZT SPROWADZENIA I REJESTRACJI AUTA*</h3>
+                <form [formGroup]="fuelCostsForm" (ngSubmit)="setFuelCostsComparsion()">
+                    <ion-item>
+                        <ion-label position="floating"> Ilość kilometrów</ion-label>
+                        <ion-input required type="text" formControlName="kilometers"></ion-input>
+                    </ion-item>
 
-            <div class="cards">
-                <div class="card friendly">
-                    <div class="header">QWEQWE</div>
-                    <div class="summary">123 123zł</div>
+                    <ion-item>
+                        <ion-label position="floating"> Cena 1 litra paliwa</ion-label>
+                        <ion-input required type="text" formControlName="fuelPrice"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating"> Średnie spalanie auta</ion-label>
+                        <ion-input required type="text" formControlName="averageCombustion"></ion-input>
+                    </ion-item>
+
+                    <div class="top-offset-mid">
+                        <button class="btn" type="submit">OBLICZ</button>
+                    </div>
+                </form>
+
+                <div class="cards top-offset-big" *ngIf="fuelCostsComparsion">
+
+                    <div class="card friendly">
+                        <div class="header">
+                            KOSZTY PALIWA <br>
+                            <span class="friendly-text">EURO AUTO CLUB</span>
+                        </div>
+                        <div class="summary">{{fuelCostsComparsion.eac}} ZŁ</div>
+                    </div>
+
+                    <div class="card warning">
+                        <div class="header">
+                            KOSZTY PALIWA <br>
+                            <span class="warning-text">TRADYCYJNIE</span>
+                        </div>
+                        <div class="summary">{{fuelCostsComparsion.normal}} ZŁ</div>
+                    </div>
                 </div>
-                <div class="card warning">
-                    <div class="header">QWEQWE</div>
-                    <div class="summary">123 123zł</div>
-                </div>
-            </div>
-
-        </section>
-        <section class="fuel-cost">
-            <h3>KARTY PALIWOWE, TANKUJESZ NAWET 10% TANIEJ</h3>
-        </section>
+            </section>
+        </div>
     </main>
     <footer>
         <div class="content">
             <div class="question">Masz jakieś pytania?</div>
             <div class="flex-line">
-                <div>Napisz</div><div>email@gmail.com</div>
+                <div>Napisz</div>
+                <div>email@gmail.com</div>
             </div>
             <div class="flex-line">
-                <div>Zadzwoń</div><div>123 123 123</div>
+                <div>Zadzwoń</div>
+                <div>123 123 123</div>
             </div>
 
         </div>

@@ -63,6 +63,17 @@ $color-font-bright: #ffffff;
   border-radius: 10px;
   color: $color-font-bright;
   outline: none;
+  transition: all 0.2s linear;
+
+  &:hover {
+    //background: $color-dark;
+    background: lighten($color-button, 10%)
+  }
+
+  &:active {
+    background: lighten($color-button, 20%)
+
+  }
 }
 
 .monsterrat {

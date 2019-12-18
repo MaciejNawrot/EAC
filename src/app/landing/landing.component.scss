@@ -2,6 +2,7 @@ $color-friendly: #7ed957;
 $color-warning: #ff5757;
 $color-accent: #b8daef;
 $color-dark: #171717;
+$color-bright: #ffffff;
 $color-button: #5271ff;
 
 $color-font-normal: #000000;
@@ -13,8 +14,12 @@ $color-font-bright: #ffffff;
     //--border-color: white; // default underline color
     //--highlight-color-invalid: red; // invalid underline color
     //--highlight-color-valid: green; // valid underline color
-    --highlight-color-focused: #171717;
-    --ion-color-primary: #171717;
+    --highlight-color-focused: $color-dark;
+    --ion-color-primary: $color-dark;
+  }
+
+  .ion-pristine {
+    --highlight-color-invalid: $color-dark; // invalid underline color
   }
 
   .left-offset {
@@ -22,8 +27,24 @@ $color-font-bright: #ffffff;
     //padding-left: 16px;
   }
 
-  .button-margin {
+  .top-offset-small {
+    margin-top: 20px;
+  }
+
+  .top-offset-mid {
     margin-top: 100px;
+  }
+
+  .top-offset-big {
+    margin-top: 150px;
+  }
+
+  .friendly-text {
+    color: $color-friendly;
+  }
+
+  .warning-text {
+    color: $color-warning;
   }
 }
 
@@ -36,6 +57,8 @@ header {
   justify-content: flex-start;
   box-sizing: border-box;
   position: relative;
+  z-index: 10;
+  background: $color-bright;
 
   nav {
     position: absolute;
@@ -59,8 +82,8 @@ header {
   .welcome-text {
     font-family: 'Sifonn Pro';
     box-sizing: border-box;
-    font-size: 64px;
-    line-height: 64px;
+    font-size: 84px;
+    line-height: 84px;
     padding: 0 26px 14px 0;
     border-bottom: 10px solid #b8daef;
   }
@@ -101,51 +124,79 @@ main {
     background-attachment: fixed;
   }
 
-  section {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 100px 135px;
+  .chips {
+    position: fixed;
+    right: 16px;
+    top: 100px;
+    z-index: 6;
 
-    h3 {
+    .total-cost {
+      width: 370px;
+      height: 127px;
+      background: $color-dark;
+      color: $color-font-bright;
       font-family: 'Sifonn Pro';
-      font-size: 24px;
-      line-height: 24px;
-      margin-bottom: 80px;
-    }
+      font-size: 16px;
+      line-height: 16px;
+      padding: 30px 5px 20px 20px;
+      cursor: pointer;
 
-    &.car-cost {
-      padding-top: 265px;
-
-      //.cost-input-wrapper {
-      //  margin-left: 68px;
-      //}
-
-      .capacity-checkbox-wrapper {
-        margin-top: 30px;
+      .cost {
+        margin-top: 16px;
       }
     }
+  }
 
-    &.register-cost {
+  .container {
+    width: 700px;
+    margin: 0 auto;
+
+    section {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 100px 0 100px 0;
 
       h3 {
-        margin-bottom: 75px;
+        font-family: 'Sifonn Pro';
+        font-size: 24px;
+        line-height: 24px;
+        margin-bottom: 80px;
       }
+
+      &.car-cost {
+        padding-top: 265px;
+
+        .capacity-checkbox-wrapper {
+          margin-top: 30px;
+        }
+      }
+
+      &.register-cost {
+
+        h3 {
+          margin-bottom: 75px;
+        }
+      }
+
+      &.fuel-cost {
+        padding-bottom: 280px;
+      }
+
     }
 
   }
-
 }
 
 .cards {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 831px;
+  width: 100%;
 }
 
 .card {
-  width: 357px;
-  height: 483px;
+  width: 300px;
+  height: 400px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -154,7 +205,7 @@ main {
   border-right: 21px solid #171717;
   border-bottom: 20px solid #171717;
   border-left: 8px solid #171717;
-  padding: 72px 20px 26px 8px;
+  padding: 55px 20px 26px 8px;
 
   .header {
     width: 100%;
@@ -176,14 +227,14 @@ main {
 
   &.friendly {
 
-    .header, .summary {
+    .summary {
       color: $color-friendly;
     }
   }
 
   &.warning {
 
-    .header, .summary {
+    .summary {
       color: $color-warning;
     }
   }
@@ -202,8 +253,8 @@ main {
 }
 
 .right {
-  width: 489px;
-  height: 891px;
+  width: 439px;
+  height: 800px;
   background-image: url("/assets/landing/right.png");
   background-position: center;
   background-size: contain;

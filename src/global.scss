@@ -30,6 +30,16 @@
   src: url('/assets/fonts/sifonn/SIFONN_PRO.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Monsterrat';
+  src: url('/assets/fonts/monsterrat/Montserrat_Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/opensans/OpenSans-Light.woff') format('woff');
+}
+
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
@@ -53,6 +63,10 @@ $color-font-bright: #ffffff;
   border-radius: 10px;
   color: $color-font-bright;
   outline: none;
+}
+
+.monsterrat {
+  font-family: 'Monsterrato';
 }
 
 .nav-btn {

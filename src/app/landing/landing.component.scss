@@ -1,6 +1,6 @@
 $color-friendly: #7ed957;
 $color-warning: #ff5757;
-$color-accent: #b8daef;
+$color-accent: #38b6ff;
 $color-dark: #171717;
 $color-bright: #ffffff;
 $color-button: #5271ff;
@@ -11,32 +11,16 @@ $color-font-bright: #ffffff;
 :host {
 
   ion-item {
-    //--border-color: white; // default underline color
-    //--highlight-color-invalid: red; // invalid underline color
-    //--highlight-color-valid: green; // valid underline color
-    --highlight-color-focused: $color-dark;
-    --ion-color-primary: $color-dark;
+    --border-color: white; // default underline color
+    --highlight-color-invalid: yellow; // invalid underline color
+    --highlight-color-valid: green; // valid underline color
+    --highlight-color-focused: #38b6ff;
+    --ion-color-primary: white;
+    --color: white;
   }
 
   .ion-pristine {
     --highlight-color-invalid: $color-dark; // invalid underline color
-  }
-
-  .left-offset {
-    //margin-left: 20px;
-    //padding-left: 16px;
-  }
-
-  .top-offset-small {
-    margin-top: 20px;
-  }
-
-  .top-offset-mid {
-    margin-top: 100px;
-  }
-
-  .top-offset-big {
-    margin-top: 150px;
   }
 
   .friendly-text {
@@ -126,15 +110,16 @@ main {
   height: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
 
   nav {
     height: 66px;
     width: 100%;
-    background-color: #38b6ff;
+    background-color: $color-accent;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 10;
   }
 
   .car__background {
@@ -147,7 +132,7 @@ main {
     background-position: center 100%;
     background-size: 100%;
     background-repeat: no-repeat;
-    z-index: 3;
+    z-index: 6;
 
     &::after {
       position: absolute;
@@ -157,23 +142,139 @@ main {
       width: 100%;
       height: 100%;
       background-color: #38b6ff55;
-      z-index: 3;
+      z-index: 7;
     }
+  }
+
+  .how-does-it-work {
+    height: 50px;
+    width: 270px;
+    background-color: $color-dark;
+    color: $color-font-bright;
+    font-size: 21px;
+    line-height: 21px;
+    font-family: 'Sifonn Pro';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   section {
-    width: 1603px;
-    height: 395px;
+    width: calc(100% - 72px);
+    height: 334px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    background-color: #e0b500;
-    z-index: 4;
+    //background-color: #e0b500;
+    z-index: 7;
 
     &.car__price__difference {
       margin: 211px 0 0 72px;
+
+      .car__cost__form {
+        height: 100%;
+        width: 360px;
+        box-sizing: border-box;
+        margin-right: 286px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        h3 {
+          font-size: 21px;
+          line-height: 21px;
+          font-family: 'Sifonn Pro';
+          color: $color-font-bright;
+        }
+
+        .cost-input-wrapper {
+          width: 100%;
+
+          &__price {
+            margin-top: 30px;
+          }
+
+          &__over2L {
+            margin-top: 16px;
+          }
+        }
+
+        &__btn {
+          margin-top: 40px;
+        }
+      }
+
+      .car__cost__calculations {
+        width: calc(100% - 646px);
+        height: 100%;
+        background-color: #7ed957;
+        overflow: hidden;
+      }
     }
+
+    &.fuel-cards {
+      background-color: #d98c71;
+      margin: 20px 0 0 72px;
+
+      .fuel-cards__cost-form {
+        height: 100%;
+        width: 360px;
+        box-sizing: border-box;
+        margin-right: 286px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        h3 {
+          font-size: 21px;
+          line-height: 21px;
+          font-family: 'Sifonn Pro';
+          color: $color-font-bright;
+        }
+
+        .fuel-cards__input-wrapper {
+          width: 100%;
+
+          &__kms {
+            margin-top: 18px;
+          }
+
+          &__price {
+            margin-top: 10px;
+          }
+
+          &__average {
+            margin-top: 10px;
+          }
+        }
+
+        &__btn {
+          margin-top: 40px;
+        }
+      }
+
+      .fuel-cards__calculations {
+        width: calc(100% - 646px);
+        height: 100%;
+        background-color: #c1acd9;
+        overflow: hidden;
+      }
+
+    }
+
+
   }
+}
+
+ion-item{
+  --ion-background-color: transparent;
 }
 
 .cards {
@@ -186,6 +287,10 @@ main {
 
 .cards--padding {
   padding: 44px 26px 0 26px;
+}
+
+.cards--centered {
+  justify-content: center;
 }
 
 
@@ -211,6 +316,7 @@ main {
     box-sizing: border-box;
     padding-bottom: 12px;
     border-bottom: 5px solid #b8daef;
+    text-transform: uppercase;
 
     .card__btn__wrapper {
       width: 100%;
@@ -221,13 +327,55 @@ main {
     }
   }
 
+  &.space-right {
+    margin-right: 108px;
+  }
+
+  &.space-left {
+    margin-left: 108px;
+    position: relative;
+  }
+
+  &.underline {
+    ::after {
+      position: absolute;
+      content: '';
+      width: 1090px;
+      height: 8px;
+      background-color: black;
+      z-index: 1;
+      bottom: -54px;
+      right: -22px;
+    }
+  }
+
+  &.card--small {
+    width: 240px;
+    height: 300px;
+    padding: 44px 22px 27px 5px;
+
+    .header {
+      font-size: 14px;
+      line-height: 14px;
+      min-height: 45px;
+    }
+
+    .summary {
+      font-size: 14px;
+      line-height: 14px;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+  }
+
   &.card--big {
+
     .header {
       border-bottom: 8px solid #b8daef;
     }
   }
-
-
 
   .summary {
     font-family: 'Sifonn Pro';
@@ -252,20 +400,6 @@ main {
           margin-top: 4px;
         }
       }
-    }
-  }
-
-  &.friendly {
-
-    .summary {
-      color: $color-friendly;
-    }
-  }
-
-  &.warning {
-
-    .summary {
-      color: $color-warning;
     }
   }
 }

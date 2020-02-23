@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {MenuController} from '@ionic/angular';
 
 @Component({
     selector: 'app-landing',
@@ -15,28 +16,43 @@ export class LandingComponent implements OnInit {
 
     totalReduction;
 
-    constructor() {
+    constructor(private menu: MenuController) {
     }
 
     ngOnInit() {
-        this.carDataForm = new FormGroup({
-            carCost: new FormControl(null, [
-                Validators.required,
-            ]),
-            isOver2L: new FormControl(false),
-        });
+        // this.carDataForm = new FormGroup({
+        //     carCost: new FormControl(null, [
+        //         Validators.required,
+        //     ]),
+        //     isOver2L: new FormControl(false),
+        // });
+        //
+        // this.fuelCostsForm = new FormGroup({
+        //     kilometers: new FormControl(null, [
+        //         Validators.required,
+        //     ]),
+        //     fuelPrice: new FormControl(null, [
+        //         Validators.required,
+        //     ]),
+        //     averageCombustion: new FormControl(null, [
+        //         Validators.required,
+        //     ]),
+        // });
+    }
 
-        this.fuelCostsForm = new FormGroup({
-            kilometers: new FormControl(null, [
-                Validators.required,
-            ]),
-            fuelPrice: new FormControl(null, [
-                Validators.required,
-            ]),
-            averageCombustion: new FormControl(null, [
-                Validators.required,
-            ]),
-        });
+
+    openFirst() {
+        this.menu.enable(true, 'first');
+        this.menu.open('first');
+    }
+
+    openEnd() {
+        this.menu.open('end');
+    }
+
+    openCustom() {
+        this.menu.enable(true, 'custom');
+        this.menu.open('custom');
     }
 
     setCarAccompanyingFees() {

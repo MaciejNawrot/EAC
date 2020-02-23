@@ -6,122 +6,182 @@
             </button>
         </nav>
         <div class="header-content">
+            <div class="logo"></div>
             <h1 class="welcome-text">
                 PRZYSTĄP DO <br>
                 EURO AUTO CLUB!
             </h1>
-            <h2 class="privileges">KORZYŚCU ZWIĄZANE Z EURO AUTO CLUB</h2>
-            <div class="button-wrapper">
-                <button class="btn">DOWIEDZ SIĘ WIĘCEJ</button>
+            <div class="cards cards--padding">
+
+                <div class="card card--big card--with__button card--with__list">
+                    <div class="header">
+                        SPRZEDAJESZ AUTA? PRZYSTĄP DO
+                        <div class="card__btn__wrapper">
+                            <ion-button expand="block" color="dark">EAC BIZNES PLAN</ion-button>
+                        </div>
+                    </div>
+                    <div class="summary">
+                        <ol>
+                            <li>
+                                Brak konieczności rejestracji w Polsce w ciągu 30 dni
+                            </li>
+                            <li>
+                                Wydłużenie terminu na zapłatę akcyzy
+                            </li>
+                            <li>
+                                Możliwość jazd próbnych i testowych
+                            </li>
+                            <li>
+                                Prowizję za polecenie nas swojemu klientowi
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card card--big card--with__button card--with__list">
+                    <div class="header">
+                        CHCESZ KUPIĆ AUTO? PRZYSTĄP DO
+                        <div class="card__btn__wrapper">
+                            <ion-button expand="block" color="dark">EAC AUTO PLAN</ion-button>
+                        </div>
+                    </div>
+                    <div class="summary">
+                        <ol>
+                            <li>
+                                BRAK Konieczności rejestracji pojazdu według nowych przepisów
+                            </li>
+                            <li>
+                                Możliwość zakupu pojazdu w cenie netto
+                            </li>
+                            <li>
+                                Karta paliwowa DKV i tańsze paliwo
+                            </li>
+                            <li>
+                                Możliwość pełnego odliczenia w Twojej działalności kosztów zakupu i eksploatacji pojazdu
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="left"></div>
         <div class="top"></div>
         <div class="right"></div>
     </header>
+
     <main>
-        <div class="slider"></div>
-        <div class="chips">
-            <div class="total-cost" *ngIf="totalReduction">
-                <div class="summary-text">CAŁKOWITY KOSZT:</div>
-                <div class="cost">{{totalReduction}} ZŁ</div>
-            </div>
-        </div>
-        <div class="container">
-            <section class="car-cost">
-
-                <h3>OPŁATY TOWARZYSZĄCE ZAKUPOWI AUTA*</h3>
-                <div class="inputs-wrapper">
-
-                    <form [formGroup]="carDataForm" (ngSubmit)="setCarAccompanyingFees()">
-                        <div class="cost-input-wrapper">
-                            <ion-item>
-                                <ion-label position="floating"> Podaj wartość auta</ion-label>
-                                <ion-input type="number" formControlName="carCost">
-                                </ion-input>
-                            </ion-item>
-                        </div>
-
-                        <ion-item class="top-offset-small">
-                            <ion-checkbox color="dark" slot="start" formControlName="isOver2L"></ion-checkbox>
-                            <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>
-                        </ion-item>
-                        <div class="top-offset-mid">
-                            <button class="btn" type="submit">OBLICZ</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-            <section class="register-cost" *ngIf="carAccompanyingFees">
-                <h3>KOSZT SPROWADZENIA I REJESTRACJI AUTA*</h3>
-
-                <div class="cards">
-
-                    <div class="card friendly">
-                        <div class="header">
-                            CENA W <br>
-                            <span class="friendly-text">EURO AUTO CLUB</span>
-                        </div>
-                        <div class="summary">{{carAccompanyingFees.eac}} ZŁ</div>
-                    </div>
-
-                    <div class="card warning">
-                        <div class="header">
-                            CENA W <br>
-                            <span class="warning-text">POLSCE</span>
-                        </div>
-                        <div class="summary">{{carAccompanyingFees.normal}} ZŁ</div>
-                    </div>
-                </div>
-            </section>
-            <section class="fuel-cost">
-                <h3>
-                    KARTY PALIWOWE, TANKUJESZ NAWET <span class="friendly-text">10% <br>
-                    TANIEJ </span>
-                </h3>
-
-                <form [formGroup]="fuelCostsForm" (ngSubmit)="setFuelCostsComparsion()">
-                    <ion-item>
-                        <ion-label position="floating"> Ilość kilometrów</ion-label>
-                        <ion-input required type="text" formControlName="kilometers"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating"> Cena 1 litra paliwa</ion-label>
-                        <ion-input required type="text" formControlName="fuelPrice"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating"> Średnie spalanie auta</ion-label>
-                        <ion-input required type="text" formControlName="averageCombustion"></ion-input>
-                    </ion-item>
-
-                    <div class="top-offset-mid">
-                        <button class="btn" type="submit">OBLICZ</button>
-                    </div>
-                </form>
-
-                <div class="cards top-offset-big" *ngIf="fuelCostsComparsion">
-
-                    <div class="card friendly">
-                        <div class="header">
-                            KOSZTY PALIWA <br>
-                            <span class="friendly-text">EURO AUTO CLUB</span>
-                        </div>
-                        <div class="summary">{{fuelCostsComparsion.eac}} ZŁ</div>
-                    </div>
-
-                    <div class="card warning">
-                        <div class="header">
-                            KOSZTY PALIWA <br>
-                            <span class="warning-text">TRADYCYJNIE</span>
-                        </div>
-                        <div class="summary">{{fuelCostsComparsion.normal}} ZŁ</div>
-                    </div>
-                </div>
-            </section>
-        </div>
+        <nav></nav>
+        <div class="car__background"></div>
+        <section class="car__price__difference"></section>
     </main>
+
+
+
+
+    <!--    <main>-->
+    <!--        <div class="slider"></div>-->
+    <!--        <div class="chips">-->
+    <!--            <div class="total-cost" *ngIf="totalReduction">-->
+    <!--                <div class="summary-text">CAŁKOWITY KOSZT:</div>-->
+    <!--                <div class="cost">{{totalReduction}} ZŁ</div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="container">-->
+    <!--            <section class="car-cost">-->
+
+    <!--                <h3>OPŁATY TOWARZYSZĄCE ZAKUPOWI AUTA*</h3>-->
+    <!--                <div class="inputs-wrapper">-->
+
+    <!--                    <form [formGroup]="carDataForm" (ngSubmit)="setCarAccompanyingFees()">-->
+    <!--                        <div class="cost-input-wrapper">-->
+    <!--                            <ion-item>-->
+    <!--                                <ion-label position="floating"> Podaj wartość auta</ion-label>-->
+    <!--                                <ion-input type="number" formControlName="carCost">-->
+    <!--                                </ion-input>-->
+    <!--                            </ion-item>-->
+    <!--                        </div>-->
+
+    <!--                        <ion-item class="top-offset-small">-->
+    <!--                            <ion-checkbox color="dark" slot="start" formControlName="isOver2L"></ion-checkbox>-->
+    <!--                            <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>-->
+    <!--                        </ion-item>-->
+    <!--                        <div class="top-offset-mid">-->
+    <!--                            <button class="btn" type="submit">OBLICZ</button>-->
+    <!--                        </div>-->
+    <!--                    </form>-->
+    <!--                </div>-->
+    <!--            </section>-->
+    <!--            <section class="register-cost" *ngIf="carAccompanyingFees">-->
+    <!--                <h3>KOSZT SPROWADZENIA I REJESTRACJI AUTA*</h3>-->
+
+    <!--                <div class="cards">-->
+
+    <!--                    <div class="card friendly">-->
+    <!--                        <div class="header">-->
+    <!--                            CENA W <br>-->
+    <!--                            <span class="friendly-text">EURO AUTO CLUB</span>-->
+    <!--                        </div>-->
+    <!--                        <div class="summary">{{carAccompanyingFees.eac}} ZŁ</div>-->
+    <!--                    </div>-->
+
+    <!--                    <div class="card warning">-->
+    <!--                        <div class="header">-->
+    <!--                            CENA W <br>-->
+    <!--                            <span class="warning-text">POLSCE</span>-->
+    <!--                        </div>-->
+    <!--                        <div class="summary">{{carAccompanyingFees.normal}} ZŁ</div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </section>-->
+    <!--            <section class="fuel-cost">-->
+    <!--                <h3>-->
+    <!--                    KARTY PALIWOWE, TANKUJESZ NAWET <span class="friendly-text">10% <br>-->
+    <!--                    TANIEJ </span>-->
+    <!--                </h3>-->
+
+    <!--                <form [formGroup]="fuelCostsForm" (ngSubmit)="setFuelCostsComparsion()">-->
+    <!--                    <ion-item>-->
+    <!--                        <ion-label position="floating"> Ilość kilometrów</ion-label>-->
+    <!--                        <ion-input required type="text" formControlName="kilometers"></ion-input>-->
+    <!--                    </ion-item>-->
+
+    <!--                    <ion-item>-->
+    <!--                        <ion-label position="floating"> Cena 1 litra paliwa</ion-label>-->
+    <!--                        <ion-input required type="text" formControlName="fuelPrice"></ion-input>-->
+    <!--                    </ion-item>-->
+
+    <!--                    <ion-item>-->
+    <!--                        <ion-label position="floating"> Średnie spalanie auta</ion-label>-->
+    <!--                        <ion-input required type="text" formControlName="averageCombustion"></ion-input>-->
+    <!--                    </ion-item>-->
+
+    <!--                    <div class="top-offset-mid">-->
+    <!--                        <button class="btn" type="submit">OBLICZ</button>-->
+    <!--                    </div>-->
+    <!--                </form>-->
+
+    <!--                <div class="cards top-offset-big" *ngIf="fuelCostsComparsion">-->
+
+    <!--                    <div class="card friendly">-->
+    <!--                        <div class="header">-->
+    <!--                            KOSZTY PALIWA <br>-->
+    <!--                            <span class="friendly-text">EURO AUTO CLUB</span>-->
+    <!--                        </div>-->
+    <!--                        <div class="summary">{{fuelCostsComparsion.eac}} ZŁ</div>-->
+    <!--                    </div>-->
+
+    <!--                    <div class="card warning">-->
+    <!--                        <div class="header">-->
+    <!--                            KOSZTY PALIWA <br>-->
+    <!--                            <span class="warning-text">TRADYCYJNIE</span>-->
+    <!--                        </div>-->
+    <!--                        <div class="summary">{{fuelCostsComparsion.normal}} ZŁ</div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </section>-->
+    <!--        </div>-->
+    <!--    </main>-->
     <footer>
         <div class="content">
             <div class="question">Masz jakieś pytania?</div>

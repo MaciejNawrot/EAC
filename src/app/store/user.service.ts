@@ -3,8 +3,8 @@ import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { AppState } from "./state";
-import { selectIsLogged } from "./selectors";
+import { AppState } from './state';
+import { selectIsLogged } from './selectors';
 
 @Injectable({
   providedIn: 'root'

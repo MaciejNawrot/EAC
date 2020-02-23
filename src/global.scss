@@ -40,8 +40,13 @@
   src: url('/assets/fonts/opensans/OpenSans-Light.woff') format('woff');
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, ol, li {
+  padding: 0;
   margin: 0;
+}
+
+ol {
+  padding-left: 20px;
 }
 
 $color-friendly: #7ed957;
@@ -53,35 +58,6 @@ $color-button: #5271ff;
 $color-font-normal: #000000;
 $color-font-bright: #ffffff;
 
-.btn {
-  width: 325px;
-  height: 72px;
-  font-family: 'Sifonn Pro';
-  font-size: 16px;
-  line-height: 16px;
-  background: $color-button;
-  border-radius: 10px;
-  color: $color-font-bright;
-  outline: none;
-  transition: all 0.2s linear;
 
-  &:hover {
-    //background: $color-dark;
-    background: lighten($color-button, 10%)
-  }
-
-  &:active {
-    background: lighten($color-button, 20%)
-
-  }
-}
-
-.monsterrat {
-  font-family: 'Monsterrato';
-}
-
-.nav-btn {
-
-}
 
 

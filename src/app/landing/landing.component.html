@@ -1,9 +1,35 @@
 <ion-content>
+    <div class="menu" [class.menu--open]="menuOpen">
+
+        <div class="menu__top">
+            <ion-icon
+                    class="close"
+                    name="close-circle-outline"
+                    (click)="toggleMenu()"
+            >
+            </ion-icon>
+            <div class="user bright">
+                <span>ZALOGUJ SIĘ</span>
+                <ion-icon name="person"></ion-icon>
+            </div>
+        </div>
+        <div class="menu__navigation">
+            <div class="menu__navigation__link">Strona Główna</div>
+            <div class="menu__navigation__link">Eac Biznes</div>
+            <div class="menu__navigation__link">Eac Auto</div>
+        </div>
+        <div class="menu__contact">
+            <div class="menu__contact__item">Kontakt</div>
+            <div class="menu__contact__item">798 709 181 <br> email@email.com</div>
+        </div>
+    </div>
     <header>
         <nav>
-            <button>
-                ZALOGUJ SIĘ X
-            </button>
+            <div class="user">
+                <span>ZALOGUJ SIĘ</span>
+                <ion-icon name="person"></ion-icon>
+            </div>
+            <ion-icon name="menu" class="hamburger" (click)="toggleMenu()"></ion-icon>
         </nav>
         <div class="header-content">
             <div class="logo"></div>
@@ -17,7 +43,7 @@
                     <div class="header">
                         SPRZEDAJESZ AUTA? PRZYSTĄP DO
                         <div class="card__btn__wrapper">
-                            <ion-button expand="block" color="dark">EAC BIZNES PLAN</ion-button>
+                            <ion-button expand="block" color="dark" (click)="toggleMenu()">EAC BIZNES PLAN</ion-button>
                         </div>
                     </div>
                     <div class="summary">
@@ -73,6 +99,21 @@
 
     <main>
         <nav></nav>
+        <div class="cost-summary">
+            <div class="cost-summary__content">
+                <div class="comparison">
+                    <div class="with-eac">
+                        Suma opłat w EAC
+                        <br><span class="friendly-text">1234 zł</span>
+                    </div>
+                    <div class="no-eac">
+                        Suma opłat poza programem
+                        <br><span class="warning-text">1234 zł</span>
+                    </div>
+                </div>
+                <div class="discount">Oszczędzasz: <span class="friendly-text">XXXXX €</span></div>
+            </div>
+        </div>
         <div class="car__background"></div>
         <div class="how-does-it-work">JAK TO DZIAŁA?</div>
         <section class="car__price__difference">
@@ -172,4 +213,4 @@
         <div class="copyright">Copyright 2019 Euro Auto Club. Wszelkie prawa zastrzeżone.</div>
     </footer>
 </ion-content>
-<ion-router-outlet id="content1"></ion-router-outlet>
+<!--<ion-router-outlet id="content1"></ion-router-outlet>-->

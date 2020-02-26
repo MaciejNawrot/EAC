@@ -30,6 +30,126 @@ $color-font-bright: #ffffff;
   .warning-text {
     color: $color-warning;
   }
+
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Sifonn Pro';
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    span {
+      transition: all 0.3s ease-in-out;
+    }
+
+    &.bright {
+      color: $color-font-bright;
+      &:hover {
+        span {
+          border-bottom: 3px solid $color-font-bright;
+        }
+      }
+    }
+
+    span {
+      padding-top: 3px;
+      border-bottom: 3px solid transparent;
+    }
+
+    &:hover {
+      span {
+        border-bottom: 3px solid $color-dark;
+      }
+    }
+
+    ion-icon {
+      margin-left: 12px;
+      font-size: 40px;
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  width: 100%;
+  max-width: 740px;
+  height: 100%;
+  top: 0;
+  right: -100%;
+  background-color: #b8daef;
+  z-index: 50;
+  transition: all 0.4s ease-in-out;
+  box-sizing: border-box;
+  padding: 40px 3%;
+  color: $color-font-bright;
+
+  &--open {
+    right: 0;
+  }
+
+  &__top {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    .close {
+      font-size: 40px;
+      cursor: pointer;
+    }
+  }
+
+  &__navigation {
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 5px solid $color-bright;
+
+    &__link {
+      margin-top: 15px;
+      font-family: 'Sifonn Pro';
+      box-sizing: border-box;
+      font-size: 20px;
+      line-height: 20px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease-in-out;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 3px solid $color-font-bright;
+      }
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  &__contact {
+    width: 100%;
+    display: flex;
+    margin-top: 70px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &__item {
+      margin-top: 15px;
+      font-family: 'Sifonn Pro';
+      box-sizing: border-box;
+      font-size: 20px;
+      line-height: 20px;
+      text-transform: uppercase;
+    }
+  }
 }
 
 header {
@@ -46,9 +166,20 @@ header {
 
   nav {
     position: absolute;
-    top: 0;
-    width: 100%;
+    top: 10px;
+    right: 20px;
     z-index: 3;
+    font-size: 54px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .hamburger {
+      font-size: 40px;
+      cursor: pointer;
+      margin-left: 22px;
+    }
   }
 }
 
@@ -120,6 +251,54 @@ main {
     top: 0;
     left: 0;
     z-index: 10;
+  }
+
+  .cost-summary {
+    width: calc(100% - 720px);
+    left: 720px;
+    position: absolute;
+    height: 174px;
+    top: 15px;
+    z-index: 11;
+
+    &__content {
+      height: 100%;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 696px;
+      background-color: $color-dark;
+      box-sizing: border-box;
+      padding: 18px 25px;
+      font-size: 14px;
+      font-family: 'Sifonn Pro';
+      color: $color-font-bright;
+      flex-direction: column;
+      justify-content: space-between;
+      display: flex;
+
+      .comparison {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+
+        .with-eac {
+          width: 50%;
+        }
+
+        .no-eac {
+          width: 50%;
+          text-align: right;
+        }
+      }
+
+      .discount {
+        width: 100%;
+        text-align: left;
+        text-transform: uppercase;
+      }
+    }
   }
 
   .car__background {
@@ -301,6 +480,7 @@ ion-item{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background-color: $color-bright;
   border-top: 7px solid $color-dark;
   border-right: 21px solid $color-dark;
   border-bottom: 20px solid $color-dark;

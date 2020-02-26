@@ -8,6 +8,7 @@ import {MenuController} from '@ionic/angular';
     styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
+    menuOpen = false;
     carDataForm: FormGroup;
     carAccompanyingFees: Comparsion;
 
@@ -38,6 +39,10 @@ export class LandingComponent implements OnInit {
         //         Validators.required,
         //     ]),
         // });
+    }
+
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
     }
 
 

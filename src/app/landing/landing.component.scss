@@ -452,11 +452,6 @@ main {
     box-sizing: border-box;
     margin: 211px 0 0 72px;
 
-    @include respond-down(screenL) {
-      height: 700px;
-      flex-direction: column;
-    }
-
     @include respond-down(screenXL) {
       margin-left: 54px;
     }
@@ -464,12 +459,11 @@ main {
     @include respond-down(screenL) {
       margin: 211px 0 0 0;
       padding: 0 100px;
+      height: unset;
+      flex-direction: column;
     }
 
     &.car__price__difference {
-
-
-
 
       .car__cost__form {
         height: 100%;

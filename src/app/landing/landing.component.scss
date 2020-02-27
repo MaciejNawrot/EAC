@@ -1,3 +1,5 @@
+@import 'src/theme/utils';
+
 $color-friendly: #7ed957;
 $color-warning: #ff5757;
 $color-accent: #38b6ff;
@@ -189,7 +191,6 @@ header {
   justify-content: flex-start;
   flex-direction: column;
   box-sizing: border-box;
-  //margin-top: 362px;
   padding-left: 161px;
   z-index: 3;
   min-height: 360px;
@@ -243,6 +244,10 @@ main {
   display: flex;
   flex-direction: column;
 
+  @include respond-down(screenL) {
+    height: auto;
+  }
+
   nav {
     height: 66px;
     width: 100%;
@@ -251,11 +256,47 @@ main {
     top: 0;
     left: 0;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .hamburger {
+      font-size: 30px;
+      color: $color-font-bright;
+      margin: 0 10px 0 20px;
+      cursor: pointer;
+    }
+
+    .nav__link {
+      font-family: 'Sifonn Pro';
+      color: $color-font-bright;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 14px;
+      text-transform: uppercase;
+      margin-left: 15px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      box-sizing: border-box;
+      padding-top: 3px;
+
+      &:hover {
+        border-bottom: 3px solid $color-font-bright;
+      }
+
+    }
   }
 
   .cost-summary {
     width: calc(100% - 720px);
     left: 720px;
+
+    @include respond-down(screenXL) {
+      width: calc(100% - 500px);
+      left: 500px;
+    }
+
     position: absolute;
     height: 174px;
     top: 15px;
@@ -309,9 +350,17 @@ main {
     height: 100%;
     background-image: url("/assets/landing/a6.jpg");
     background-position: center 100%;
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 6;
+
+    @include respond-down(screenXL) {
+      width: 500px;
+    }
+
+    @include respond-down(screenL) {
+      width: 100%;
+    }
 
     &::after {
       position: absolute;
@@ -323,37 +372,96 @@ main {
       background-color: #38b6ff55;
       z-index: 7;
     }
+
+
   }
 
+
   .how-does-it-work {
-    height: 50px;
-    width: 270px;
-    background-color: $color-dark;
-    color: $color-font-bright;
-    font-size: 21px;
-    line-height: 21px;
-    font-family: 'Sifonn Pro';
+    width: calc(100% - 720px);
+    left: 720px;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 7;
+    height: 64px;
+    z-index: 11;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+    bottom: 0;
+    transition: all 0.3s linear;
+
+    @include respond-down(screenXL) {
+      width: calc(100% - 500px);
+      left: 500px;
+    }
+
+    &__content--short {
+      height: 100%;
+      width: 270px;
+      background-color: $color-dark;
+      color: $color-font-bright;
+      font-size: 21px;
+      line-height: 21px;
+      font-family: 'Sifonn Pro';
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__content--long{
+      display: none;
+      height: 100%;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 696px;
+      background-color: $color-dark;
+      box-sizing: border-box;
+      padding: 8px 2px 0 2px;
+      font-size: 10px;
+      font-family: 'Monsterrat';
+      color: $color-font-bright;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    &:hover{
+      .how-does-it-work__content--short {
+        display: none !important;
+      }
+
+      .how-does-it-work__content--long {
+        display: flex;
+      }
+    }
   }
 
   section {
-    width: calc(100% - 72px);
+    width: 100%;
     height: 334px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    //background-color: #e0b500;
     z-index: 7;
+    box-sizing: border-box;
+
+    @include respond-down(screenL) {
+      height: 700px;
+      flex-direction: column;
+    }
 
     &.car__price__difference {
       margin: 211px 0 0 72px;
+
+      @include respond-down(screenXL) {
+        margin-left: 54px;
+      }
+
+      @include respond-down(screenL) {
+        margin: 211px 0 0 0;
+        padding: 0 100px;
+      }
 
       .car__cost__form {
         height: 100%;
@@ -364,6 +472,15 @@ main {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
+
+        @include respond-down(screenXL) {
+          margin-right: 86px;
+        }
+
+        @include respond-down(screenL) {
+          margin-right: 0;
+          width: 100%;
+        }
 
         h3 {
           font-size: 21px;
@@ -390,16 +507,26 @@ main {
       }
 
       .car__cost__calculations {
-        width: calc(100% - 646px);
+        width: calc(100% - 720px);
         height: 100%;
-        background-color: #7ed957;
         overflow: hidden;
+
+        @include respond-down(screenXL) {
+          width: calc(100% - 500px);
+        }
+
+        @include respond-down(screenL) {
+          width: 100%;
+        }
       }
     }
 
     &.fuel-cards {
-      background-color: #d98c71;
       margin: 20px 0 0 72px;
+
+      @include respond-down(screenXL) {
+        margin-left: 54px;
+      }
 
       .fuel-cards__cost-form {
         height: 100%;
@@ -410,6 +537,14 @@ main {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
+
+        @include respond-down(screenXL) {
+          margin-right: 86px;
+        }
+
+        @include respond-down(screenL) {
+          width: 100%;
+        }
 
         h3 {
           font-size: 21px;
@@ -440,10 +575,13 @@ main {
       }
 
       .fuel-cards__calculations {
-        width: calc(100% - 646px);
+        width: calc(100% - 720px);
         height: 100%;
-        background-color: #c1acd9;
         overflow: hidden;
+
+        @include respond-down(screenXL) {
+          width: calc(100% - 500px);
+        }
       }
 
     }
@@ -509,11 +647,19 @@ ion-item{
 
   &.space-right {
     margin-right: 108px;
+
+    @include respond-down(screenXL) {
+      margin-right: 6%;
+    }
   }
 
   &.space-left {
     margin-left: 108px;
     position: relative;
+
+    @include respond-down(screenXL) {
+      margin-left: 6%;
+    }
   }
 
   &.underline {

@@ -98,7 +98,23 @@
     </header>
 
     <main>
-        <nav></nav>
+        <nav>
+            <ion-icon
+                    name="menu"
+                    class="hamburger"
+                    (click)="toggleMenu()"
+            >
+            </ion-icon>
+            <div class="nav__link">
+                STRONA GŁÓWNA
+            </div>
+            <div class="nav__link">
+                EAC AUTO
+            </div>
+            <div class="nav__link">
+                EAC BIZNES
+            </div>
+        </nav>
         <div class="cost-summary">
             <div class="cost-summary__content">
                 <div class="comparison">
@@ -115,7 +131,17 @@
             </div>
         </div>
         <div class="car__background"></div>
-        <div class="how-does-it-work">JAK TO DZIAŁA?</div>
+        <div class="how-does-it-work">
+            <div class="how-does-it-work__content--short">JAK TO DZIAŁA?</div>
+            <div class="how-does-it-work__content--long">
+                <ol>
+                    <li>Kupujesz pojazd</li>
+                    <li>Zgłaszasz w EAC zakupiony pojazd do wyceny online</li>
+                    <li>Zawierasz umowę z EAC</li>
+                    <li>Otrzymujesz swobodę poruszania się pojazdem i korzystasz z udziału w EAC Auto</li>
+                </ol>
+            </div>
+        </div>
         <section class="car__price__difference">
             <div class="car__cost__form">
                 <h3>EURO AUTO PROGRAM</h3>

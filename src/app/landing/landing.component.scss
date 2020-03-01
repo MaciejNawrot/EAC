@@ -166,11 +166,15 @@ header {
   z-index: 20;
   background: $color-bright;
 
+  @include respond-down(screenL) {
+    height: auto;
+  }
+
   nav {
     position: absolute;
     top: 10px;
     right: 20px;
-    z-index: 3;
+    z-index: 5;
     font-size: 54px;
     cursor: pointer;
     display: flex;
@@ -197,6 +201,17 @@ header {
   height: 100%;
   width: 870px;
 
+  @include respond-down(screenL) {
+    height: auto;
+    padding-left: 0;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  @include respond-down(screenSMM) {
+    width: 100%;
+  }
+
   .logo {
     width: 421px;
     height: 262px;
@@ -205,6 +220,17 @@ header {
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
+
+    @include respond-down(screenL) {
+      margin-top: 50px;
+    }
+
+    @include respond-down(screenSMM) {
+      transform: scale(0.7);
+      transform-origin: center center;
+      background-size: contain;
+      width: 100%;
+    }
   }
 
   .welcome-text {
@@ -217,6 +243,19 @@ header {
     width: 100%;
     text-align: center;
     border-bottom: 10px solid #b8daef;
+
+    @include respond-down(screenSMM) {
+      flex-direction: column;
+      font-size: 32px;
+      line-height: 32px;
+      margin-top: 0;
+      width: unset;
+    }
+
+    @include respond-down(screenS) {
+      font-size: 28px;
+      line-height: 28px;
+    }
   }
 
   .privileges {
@@ -319,8 +358,21 @@ main {
       left: unset;
       right: 17px;
       position: fixed;
+      height: 102px;
     }
 
+    @include respond-down(screenSMM) {
+      left: 0;
+      right: unset;
+
+      :after {
+        content: '';
+        width: 50px;
+        height: 50px;
+        background: red;
+        z-index: 23;
+      }
+    }
 
 
     &__content {
@@ -341,7 +393,7 @@ main {
       .comparison {
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         text-transform: uppercase;
 
@@ -482,6 +534,14 @@ main {
       padding: 0 100px;
       height: unset;
       flex-direction: column;
+    }
+
+    @include respond-down(screenSMM){
+      padding: 0 30px;
+    }
+
+    @include respond-down(screenS){
+      padding: 0 10px;
     }
 
     &.car__price__difference {
@@ -630,10 +690,23 @@ ion-item{
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+
+  @include respond-down(screenM) {
+    flex-direction: column;
+  }
 }
 
 .cards--padding {
   padding: 44px 26px 0 26px;
+
+  .card {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  @include respond-down(screenSMM) {
+    padding: 0 0 44px 0;
+  }
 }
 
 .cards--centered {
@@ -654,6 +727,10 @@ ion-item{
   border-bottom: 20px solid $color-dark;
   border-left: 8px solid $color-dark;
   padding: 18px 20px 8px 8px;
+
+  @include respond-down(screenM) {
+    margin-top: 30px;
+  }
 
   .header {
     width: 100%;
@@ -681,6 +758,10 @@ ion-item{
     @include respond-down(screenXL) {
       margin-right: 6%;
     }
+
+    @include respond-down(screenM) {
+      margin-right: 0;
+    }
   }
 
   &.space-left {
@@ -689,6 +770,10 @@ ion-item{
 
     @include respond-down(screenXL) {
       margin-left: 6%;
+    }
+
+    @include respond-down(screenM) {
+      margin-left: 0;
     }
   }
 
@@ -774,6 +859,11 @@ ion-item{
   top: 0;
   left: 0;
   z-index: 1;
+
+  @include respond-down(screenL) {
+    left: -154px;
+    transform: rotate(-44deg);
+  }
 }
 
 .right {
@@ -786,6 +876,14 @@ ion-item{
   bottom: 0;
   right: 0;
   z-index: 1;
+
+  @include respond-down(screenL) {
+    right: -100px;
+  }
+
+  @include respond-down(screenSMM) {
+    right: 0;
+  }
 }
 
 .top {
@@ -798,6 +896,12 @@ ion-item{
   top: 0;
   left: 53%;
   z-index: 1;
+
+  @include respond-down(screenL) {
+    left: unset;
+    right: -275px;
+    top: -123px;
+  }
 }
 
 footer {
@@ -807,13 +911,27 @@ footer {
   color: $color-font-bright;
   padding: 27px 0 0 51px;
 
+  @include respond-down(screenM) {
+    height: auto;
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+
   .content {
     height: 90px;
     width: 435px;
     font-family: 'Monsterrat';
 
+    @include respond-down(screenM) {
+      width: 100%;
+    }
+
     .question {
       margin-bottom: 17px;
+
+      @include respond-down(screenM) {
+        text-align: center;
+      }
     }
 
     .flex-line {
@@ -821,11 +939,20 @@ footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @include respond-down(screenM) {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   }
 
   .copyright {
     margin-top: 40px;
     font-family: 'Open Sans';
+
+    @include respond-down(screenM) {
+      text-align: center;
+    }
   }
 }

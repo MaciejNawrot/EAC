@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {MenuController} from '@ionic/angular';
 
 @Component({
     selector: 'app-landing',
@@ -9,65 +8,86 @@ import {MenuController} from '@ionic/angular';
 })
 export class LandingComponent implements OnInit {
     menuOpen = false;
+    mode: 'business' | 'normal' | '' = '';
+    comparsionOpen = true;
     carDataForm: FormGroup;
-    carAccompanyingFees: Comparsion;
+    carAccompanyingFees: Comparsion = {
+        eac: 0,
+        normal: 0
+    };
 
     fuelCostsForm: FormGroup;
-    fuelCostsComparsion: Comparsion;
+    fuelCostsComparsion: Comparsion = {
+        eac: 0,
+        normal: 0
+    };
 
+    carCost: number;
     totalReduction;
 
-    constructor(private menu: MenuController) {
-    }
+    constructor() {}
 
     ngOnInit() {
-        // this.carDataForm = new FormGroup({
-        //     carCost: new FormControl(null, [
-        //         Validators.required,
-        //     ]),
-        //     isOver2L: new FormControl(false),
-        // });
-        //
-        // this.fuelCostsForm = new FormGroup({
-        //     kilometers: new FormControl(null, [
-        //         Validators.required,
-        //     ]),
-        //     fuelPrice: new FormControl(null, [
-        //         Validators.required,
-        //     ]),
-        //     averageCombustion: new FormControl(null, [
-        //         Validators.required,
-        //     ]),
-        // });
+        this.carDataForm = new FormGroup({
+            carCost: new FormControl(10000, [
+                Validators.required,
+            ]),
+            isOver2L: new FormControl(false),
+        });
+
+        this.fuelCostsForm = new FormGroup({
+            kilometers: new FormControl(1000, [
+                Validators.required,
+            ]),
+            fuelPrice: new FormControl(4.91, [
+                Validators.required,
+            ]),
+            averageCombustion: new FormControl(6.2, [
+                Validators.required,
+            ]),
+        });
+        this.setCarAccompanyingFees();
+        this.setFuelCostsComparsion();
+    }
+
+    setMode(mode: 'business' | 'normal' | '', target) {
+        this.mode = mode;
+        this.menuOpen = false;
+        setTimeout(() => {
+            target.scrollIntoView({behavior: 'smooth'});
+        }, 10);
+    }
+
+    scrollTop(target) {
+        target.scrollIntoView({behavior: 'smooth'});
     }
 
     toggleMenu() {
         this.menuOpen = !this.menuOpen;
     }
 
-
-    openFirst() {
-        this.menu.enable(true, 'first');
-        this.menu.open('first');
+    toggleComparsion() {
+        this.comparsionOpen = !this.comparsionOpen;
     }
 
-    openEnd() {
-        this.menu.open('end');
+    onSubmitCarData() {
+        console.log('cardata');
+        this.setCarAccompanyingFees();
     }
 
-    openCustom() {
-        this.menu.enable(true, 'custom');
-        this.menu.open('custom');
+    onSubmitFuelCosts() {
+        console.log('fuelcosts');
+        this.setFuelCostsComparsion();
     }
 
     setCarAccompanyingFees() {
         console.log(this.carDataForm);
-        const carCost = this.carDataForm.controls.carCost.value;
+        this.carCost = this.carDataForm.controls.carCost.value;
         const isOver2L = this.carDataForm.controls.isOver2L.value;
         const carCostModifier = isOver2L ? 1.44 : 1.32;
         this.carAccompanyingFees = {
-            eac: this.calculateSafe(carCost * carCostModifier + 600, 2),
-            normal: this.calculateSafe(carCost * (carCostModifier + 0.13) + 1100, 2),
+            eac: this.calculateSafe(this.carCost * carCostModifier + 600, 2),
+            normal: this.calculateSafe(this.carCost * (carCostModifier + 0.13) + 1100, 2),
         };
         this.calculateTotalReduction();
         console.log(this.carAccompanyingFees);
@@ -104,3 +124,5 @@ interface Comparsion {
     eac: number;
     normal: number;
 }
+
+

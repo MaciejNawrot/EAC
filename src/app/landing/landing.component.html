@@ -14,16 +14,16 @@
             </div>
         </div>
         <div class="menu__navigation">
-            <div class="menu__navigation__link">Strona Główna</div>
-            <div class="menu__navigation__link">Eac Biznes</div>
-            <div class="menu__navigation__link">Eac Auto</div>
+            <div class="menu__navigation__link" (click)="scrollTop(top)">Strona Główna</div>
+            <div class="menu__navigation__link" (click)="setMode('business', main)">Eac Biznes</div>
+            <div class="menu__navigation__link" (click)="setMode('normal', main)">Eac Auto</div>
         </div>
         <div class="menu__contact">
             <div class="menu__contact__item">Kontakt</div>
             <div class="menu__contact__item">798 709 181 <br> email@email.com</div>
         </div>
     </div>
-    <header>
+    <header #top>
         <nav>
             <div class="user">
                 <span>ZALOGUJ SIĘ</span>
@@ -43,7 +43,13 @@
                     <div class="header">
                         SPRZEDAJESZ AUTA? PRZYSTĄP DO
                         <div class="card__btn__wrapper">
-                            <ion-button expand="block" color="dark" (click)="toggleMenu()">EAC BIZNES PLAN</ion-button>
+                            <ion-button
+                                    expand="block"
+                                    color="dark"
+                                    (click)="setMode('business', main)"
+                            >
+                                EAC BIZNES PLAN
+                            </ion-button>
                         </div>
                     </div>
                     <div class="summary">
@@ -68,7 +74,9 @@
                     <div class="header">
                         CHCESZ KUPIĆ AUTO? PRZYSTĄP DO
                         <div class="card__btn__wrapper">
-                            <ion-button expand="block" color="dark">EAC AUTO PLAN</ion-button>
+                            <ion-button expand="block" color="dark" (click)="setMode('normal', main)">
+                                EAC AUTO PLAN
+                            </ion-button>
                         </div>
                     </div>
                     <div class="summary">
@@ -96,8 +104,8 @@
         <div class="top"></div>
         <div class="right"></div>
     </header>
-
-    <main>
+    <div #main></div>
+    <main *ngIf="mode">
         <nav>
             <ion-icon
                     name="menu"
@@ -105,32 +113,53 @@
                     (click)="toggleMenu()"
             >
             </ion-icon>
-            <div class="nav__link">
+            <div class="nav__link" (click)="scrollTop(top)">
                 STRONA GŁÓWNA
             </div>
-            <div class="nav__link">
+            <div class="nav__link" (click)="setMode('normal', main)">
                 EAC AUTO
             </div>
-            <div class="nav__link">
+            <div class="nav__link" (click)="setMode('business', main)">
                 EAC BIZNES
             </div>
         </nav>
-        <div class="cost-summary">
+        <div
+                [class.cost-summary--closed]="!comparsionOpen"
+                class="cost-summary"
+        >
             <div class="cost-summary__content">
+                <div
+                        class="cost-summary__content__toggle"
+                        [class.cost-summary__content__toggle--flip]="comparsionOpen"
+                        (click)="toggleComparsion()"
+                >
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </div>
                 <div class="comparison">
                     <div class="with-eac">
                         Suma opłat w EAC
-                        <br><span class="friendly-text">1234 zł</span>
+                        <br>
+                        <span class="friendly-text">
+                            {{carAccompanyingFees.eac + fuelCostsComparsion.eac}} EURO
+                        </span>
                     </div>
                     <div class="no-eac">
                         Suma opłat poza programem
-                        <br><span class="warning-text">1234 zł</span>
+                        <br>
+                        <span class="warning-text">
+                            {{carAccompanyingFees.normal + fuelCostsComparsion.normal}} EURO
+                        </span>
                     </div>
                 </div>
-                <div class="discount">Oszczędzasz: <span class="friendly-text">XXXXX €</span></div>
+                <div class="discount">Oszczędzasz: <span class="friendly-text">
+                    {{
+                        (carAccompanyingFees.normal + fuelCostsComparsion.normal) -
+                        (carAccompanyingFees.eac + fuelCostsComparsion.eac) | number:'1.2-2'
+                    }}
+                    €</span></div>
             </div>
         </div>
-        <div class="car__background"></div>
+        <div class="car__background" [class.business]="mode === 'business'"></div>
         <div class="how-does-it-work">
             <div class="how-does-it-work__content--short">JAK TO DZIAŁA?</div>
             <div class="how-does-it-work__content--long">
@@ -144,79 +173,83 @@
         </div>
         <section class="car__price__difference">
             <div class="car__cost__form">
-                <h3>EURO AUTO PROGRAM</h3>
-                <div class="cost-input-wrapper">
-                    <ion-item class="cost-input-wrapper__price">
-                        <ion-label position="floating" color="light"> Podaj wartość auta</ion-label>
-                        <ion-input type="number" color="light">
-                        </ion-input>
-                    </ion-item>
-                    <ion-item class="cost-input-wrapper__over2L">
-                        <ion-checkbox color="secondary" slot="start"></ion-checkbox>
-                        <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>
-                    </ion-item>
-                </div>
-                <div class="car__cost__form__btn">
-                    <ion-button expand="block" color="light">EAC BIZNES PLAN</ion-button>
-                </div>
+                <form [formGroup]="carDataForm" (ngSubmit)="onSubmitCarData()">
+                    <h3>EURO AUTO PROGRAM</h3>
+                    <div class="cost-input-wrapper">
+                        <ion-item class="cost-input-wrapper__price">
+                            <ion-label position="floating" color="light"> Podaj wartość auta w Euro</ion-label>
+                            <ion-input type="number" color="light" formControlName="carCost">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item class="cost-input-wrapper__over2L">
+                            <ion-checkbox color="secondary" slot="start" formControlName="isOver2L"></ion-checkbox>
+                            <ion-label><span class="left-offset">Powyżej 2L</span></ion-label>
+                        </ion-item>
+                    </div>
+                    <div class="car__cost__form__btn">
+                        <ion-button expand="block" color="light" type="submit">PRZELICZ</ion-button>
+                    </div>
+                </form>
             </div>
             <div class="car__cost__calculations">
                 <div class="cards cards--centered">
                     <div class="card card--small space-right">
                         <div class="header">
                             OPŁATY <span class="friendly-text">EAC</span><br>
-                            DLA 10 000 EURO
+                            DLA {{carCost}} EURO
                         </div>
-                        <div class="summary friendly-text">123 zł</div>
+                        <div class="summary friendly-text">{{carAccompanyingFees.eac}} EURO</div>
                     </div>
                     <div class="card card--small space-left underline">
                         <div class="header">
                             opłata poza programem<br>
                         </div>
-                        <div class="summary warning-text">123 zł</div>
+                        <div class="summary warning-text">{{carAccompanyingFees.normal}} EURO</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="fuel-cards">
+        <section class="fuel-cards" *ngIf="mode === 'normal'">
             <div class="fuel-cards__cost-form">
-                <h3>EURO AUTO PROGRAM</h3>
-                <div class="fuel-cards__input-wrapper">
-                    <ion-item class="fuel-cards__input-wrapper__kms">
-                        <ion-label position="floating" color="light"> Podaj wartość auta</ion-label>
-                        <ion-input type="number" color="light">
-                        </ion-input>
-                    </ion-item>
-                    <ion-item class="fuel-cards__input-wrapper__price">
-                        <ion-label position="floating" color="light"> Podaj wartość auta</ion-label>
-                        <ion-input type="number" color="light">
-                        </ion-input>
-                    </ion-item>
-                    <ion-item class="fuel-cards__input-wrapper__average">
-                        <ion-label position="floating" color="light"> Podaj wartość auta</ion-label>
-                        <ion-input type="number" color="light">
-                        </ion-input>
-                    </ion-item>
-                </div>
-                <div class="fuel-cards__cost-form__btn">
-                    <ion-button expand="block" color="light">EAC BIZNES PLAN</ion-button>
-                </div>
+                <form [formGroup]="fuelCostsForm" (ngSubmit)="onSubmitFuelCosts()">
+                    <h3>EURO AUTO PROGRAM</h3>
+                    <div class="fuel-cards__input-wrapper">
+                        <ion-item class="fuel-cards__input-wrapper__kms">
+                            <ion-label position="floating" color="light">Ilość kilometrów</ion-label>
+                            <ion-input type="number" color="light" formControlName="kilometers">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item class="fuel-cards__input-wrapper__price">
+                            <ion-label position="floating" color="light">Cena 1 litra paliwa w EURO</ion-label>
+                            <ion-input type="number" color="light" formControlName="fuelPrice">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item class="fuel-cards__input-wrapper__average">
+                            <ion-label position="floating" color="light">Średnie spalanie auta</ion-label>
+                            <ion-input type="number" color="light" formControlName="averageCombustion">
+                            </ion-input>
+                        </ion-item>
+                    </div>
+                    <div class="fuel-cards__cost-form__btn">
+                        <ion-button expand="block" color="light" type="submit">PRZELICZ</ion-button>
+                    </div>
+                </form>
             </div>
             <div class="fuel-cards__calculations">
                 <div class="cards cards--centered">
                     <div class="card card--small space-right">
                         <div class="header">
-                            OPŁATY <span class="friendly-text">EAC</span><br>
-                            DLA 10 000 EURO
+                            KOSZTY PALIWA <br>
+                            <span class="friendly-text">EURO AUTO CLUB</span>
                         </div>
-                        <div class="summary friendly-text">123 zł</div>
+                        <div class="summary friendly-text">{{fuelCostsComparsion.eac}} EURO</div>
                     </div>
                     <div class="card card--small space-left">
                         <div class="header">
-                            opłata poza programem<br>
+                            KOSZTY PALIWA TRADYCYJNIE<br>
                         </div>
-                        <div class="summary warning-text">123 zł</div>
+                        <div class="summary warning-text">{{fuelCostsComparsion.normal}} EURO</div>
                     </div>
                 </div>
             </div>
@@ -239,4 +272,3 @@
         <div class="copyright">Copyright 2019 Euro Auto Club. Wszelkie prawa zastrzeżone.</div>
     </footer>
 </ion-content>
-<!--<ion-router-outlet id="content1"></ion-router-outlet>-->

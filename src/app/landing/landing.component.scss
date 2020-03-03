@@ -11,6 +11,7 @@ $color-font-normal: #000000;
 $color-font-bright: #ffffff;
 
 :host {
+  scroll-behavior: smooth;
 
   ion-item {
     --border-color: white; // default underline color
@@ -43,6 +44,7 @@ $color-font-bright: #ffffff;
     font-family: 'Sifonn Pro';
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    opacity: 0;
 
     span {
       transition: all 0.3s ease-in-out;
@@ -346,6 +348,7 @@ main {
     height: 174px;
     top: 15px;
     z-index: 11;
+    transition: all 0.3s ease-in-out;
 
     @include respond-down(screenXL) {
       width: calc(100% - 500px);
@@ -364,16 +367,11 @@ main {
     @include respond-down(screenSMM) {
       left: 0;
       right: unset;
-
-      :after {
-        content: '';
-        width: 50px;
-        height: 50px;
-        background: red;
-        z-index: 23;
-      }
     }
 
+    &--closed {
+      left: calc(-100% + 40px);
+    }
 
     &__content {
       height: 100%;
@@ -384,11 +382,45 @@ main {
       box-sizing: border-box;
       padding: 18px 25px;
       font-size: 14px;
+      line-height: 20px;
       font-family: 'Sifonn Pro';
       color: $color-font-bright;
       flex-direction: column;
       justify-content: space-between;
       display: flex;
+      position: relative;
+
+      @include respond-down(screenSMM) {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      &__toggle {
+        display: none;
+        width: 40px;
+        height: 40px;
+        z-index: 23;
+        position: absolute;
+        bottom: 0;
+        right: 5px;
+        transition: 0.3s all ease-in-out;
+        cursor: pointer;
+
+        &--flip {
+          transform: rotate(180deg);
+        }
+
+        ion-icon {
+          font-size: 30px;
+          line-height: 30px;
+        }
+
+        @include respond-down(screenSMM) {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
 
       .comparison {
         width: 100%;
@@ -426,6 +458,7 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 6;
+    transition: 0.3s ease-in-out;
 
     @include respond-down(screenXL) {
       width: 500px;
@@ -433,6 +466,10 @@ main {
 
     @include respond-down(screenL) {
       width: 100%;
+    }
+
+    &.business {
+      background-image: url("/assets/landing/a5.jpg");
     }
 
     &::after {
@@ -565,6 +602,10 @@ main {
           width: 100%;
         }
 
+        form {
+          width: 100%;
+        }
+
         h3 {
           font-size: 21px;
           line-height: 21px;
@@ -585,6 +626,7 @@ main {
         }
 
         &__btn {
+          width: 230px;
           margin-top: 40px;
         }
       }
@@ -606,7 +648,6 @@ main {
     }
 
     &.fuel-cards {
-      //margin: 20px 0 0 72px;
       margin-top: 20px;
 
       @include respond-down(screenL) {
@@ -628,6 +669,10 @@ main {
         }
 
         @include respond-down(screenL) {
+          width: 100%;
+        }
+
+        form {
           width: 100%;
         }
 
@@ -655,6 +700,7 @@ main {
         }
 
         &__btn {
+          width: 230px;
           margin-top: 40px;
         }
       }

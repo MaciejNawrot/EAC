@@ -218,7 +218,7 @@ header {
     width: 421px;
     height: 262px;
     margin: 20px auto 0 auto;
-    background-image: url("/assets/landing/eac.png");
+    background-image: url("../../assets/landing/eac.png");
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -453,7 +453,7 @@ main {
     left: 0;
     width: 720px;
     height: 100%;
-    background-image: url("/assets/landing/a6.jpg");
+    background-image: url("../../assets/landing/a6.jpg");
     background-position: center 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -469,7 +469,7 @@ main {
     }
 
     &.business {
-      background-image: url("/assets/landing/a5.jpg");
+      background-image: url("../../assets/landing/a5.jpg");
     }
 
     &::after {
@@ -902,7 +902,7 @@ ion-item{
 .left {
   width: 263px;
   height: 348px;
-  background-image: url("/assets/landing/left.png");
+  background-image: url("../../assets/landing/left.png");
   background-position: center;
   background-size: contain;
   position: absolute;
@@ -919,7 +919,7 @@ ion-item{
 .right {
   width: 439px;
   height: 800px;
-  background-image: url("/assets/landing/right.png");
+  background-image: url("../../assets/landing/right.png");
   background-position: center;
   background-size: contain;
   position: absolute;
@@ -939,7 +939,7 @@ ion-item{
 .top {
   width: 409px;
   height: 284px;
-  background-image: url("/assets/landing/top.png");
+  background-image: url("../../assets/landing/top.png");
   background-position: center;
   background-size: contain;
   position: absolute;

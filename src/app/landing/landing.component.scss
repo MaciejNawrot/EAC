@@ -757,6 +757,10 @@ ion-item{
 
 .cards--centered {
   justify-content: center;
+
+  @include respond-down(screenM) {
+    margin-bottom: 70px;
+  }
 }
 
 

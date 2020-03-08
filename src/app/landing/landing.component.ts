@@ -25,7 +25,8 @@ export class LandingComponent implements OnInit {
     carCost: number;
     totalReduction;
 
-    constructor() {}
+    constructor() {
+    }
 
     ngOnInit() {
         this.carDataForm = new FormGroup({
@@ -53,6 +54,8 @@ export class LandingComponent implements OnInit {
     setMode(mode: 'business' | 'normal' | '', target) {
         this.mode = mode;
         this.menuOpen = false;
+        this.setCarAccompanyingFees();
+        this.setFuelCostsComparsion();
         setTimeout(() => {
             target.scrollIntoView({behavior: 'smooth'});
         }, 10);
@@ -71,12 +74,10 @@ export class LandingComponent implements OnInit {
     }
 
     onSubmitCarData() {
-        console.log('cardata');
         this.setCarAccompanyingFees();
     }
 
     onSubmitFuelCosts() {
-        console.log('fuelcosts');
         this.setFuelCostsComparsion();
     }
 
@@ -84,17 +85,27 @@ export class LandingComponent implements OnInit {
         console.log(this.carDataForm);
         this.carCost = this.carDataForm.controls.carCost.value;
         const isOver2L = this.carDataForm.controls.isOver2L.value;
-        const carCostModifier = isOver2L ? 1.44 : 1.32;
+        const eacCarCostModifier = this.generateCacCarCostModifier(isOver2L);
+        const inPolandCarCostModifier = this.generateNormalCarCostModifier(isOver2L);
+        const eacBaseFee = 150;
+        const inPolandBaseFee = 400;
         this.carAccompanyingFees = {
-            eac: this.calculateSafe(this.carCost * carCostModifier + 600, 2),
-            normal: this.calculateSafe(this.carCost * (carCostModifier + 0.13) + 1100, 2),
+            eac: this.calculateSafe(this.carCost * eacCarCostModifier + eacBaseFee, 2),
+            normal: this.calculateSafe(this.carCost * (inPolandCarCostModifier ) + inPolandBaseFee, 2),
         };
         this.calculateTotalReduction();
         console.log(this.carAccompanyingFees);
     }
 
     setFuelCostsComparsion() {
-        console.log(this.fuelCostsForm);
+        if (this.mode === 'business') {
+            this.fuelCostsComparsion = {
+                eac: 0,
+                normal: 0,
+            };
+            return;
+        }
+
         const kilometers = this.fuelCostsForm.controls.kilometers.value;
         const fuelPrice = this.fuelCostsForm.controls.fuelPrice.value;
         const averageCombustion = this.fuelCostsForm.controls.averageCombustion.value;
@@ -105,7 +116,6 @@ export class LandingComponent implements OnInit {
         };
 
         this.calculateTotalReduction();
-        console.log(this.fuelCostsComparsion);
     }
 
     calculateTotalReduction() {
@@ -116,6 +126,24 @@ export class LandingComponent implements OnInit {
 
     calculateSafe(value: number, precision = 2): number {
         return parseFloat(value.toFixed(precision));
+    }
+
+    generateCacCarCostModifier(isOver2L: boolean): number {
+        let modifier = 1;
+
+        if (!this.mode || this.mode === 'normal') {
+            modifier = isOver2L ? 1.08 : 1.015;
+        }
+
+        if (this.mode === 'business') {
+            modifier = isOver2L ? 1.035 : 1;
+        }
+
+        return modifier;
+    }
+
+    generateNormalCarCostModifier(isOver2L: boolean): number {
+        return isOver2L ? 1.186 : 1.031;
     }
 
 }

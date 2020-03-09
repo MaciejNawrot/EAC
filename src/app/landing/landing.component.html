@@ -35,7 +35,7 @@
             <div class="logo"></div>
             <h1 class="welcome-text">
                 PRZYSTĄP DO <br>
-                EURO AUTO CLUB!
+                <span class="friendly-text"> EURO AUTO CLUB! </span>
             </h1>
             <div class="cards cards--padding">
 
@@ -48,7 +48,7 @@
                                     color="dark"
                                     (click)="setMode('business', main)"
                             >
-                                EAC BIZNES PLAN
+                                Program EAC Biznes
                             </ion-button>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         CHCESZ KUPIĆ AUTO? PRZYSTĄP DO
                         <div class="card__btn__wrapper">
                             <ion-button expand="block" color="dark" (click)="setMode('normal', main)">
-                                EAC AUTO PLAN
+                                Program EAC Auto
                             </ion-button>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
         <section class="car__price__difference">
             <div class="car__cost__form">
                 <form [formGroup]="carDataForm" (ngSubmit)="onSubmitCarData()">
-                    <h3>EURO AUTO PROGRAM</h3>
+                    <h3>{{mode === 'business' ? 'Program EAC Biznes' : 'Program EAC Auto'}}</h3>
                     <div class="cost-input-wrapper">
                         <ion-item class="cost-input-wrapper__price">
                             <ion-label position="floating" color="light"> Podaj wartość auta w Euro</ion-label>
@@ -213,7 +213,7 @@
         <section class="fuel-cards" *ngIf="mode === 'normal'">
             <div class="fuel-cards__cost-form">
                 <form [formGroup]="fuelCostsForm" (ngSubmit)="onSubmitFuelCosts()">
-                    <h3>EURO AUTO PROGRAM</h3>
+                    <h3>{{mode === 'business' ? 'EURO BIZNES PROGRAM' : 'EURO AUTO PROGRAM'}}</h3>
                     <div class="fuel-cards__input-wrapper">
                         <ion-item class="fuel-cards__input-wrapper__kms">
                             <ion-label position="floating" color="light">Ilość kilometrów</ion-label>

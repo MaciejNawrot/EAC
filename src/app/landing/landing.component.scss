@@ -13,6 +13,20 @@ $color-font-bright: #ffffff;
 :host {
   scroll-behavior: smooth;
 
+  ion-checkbox{
+    //background: #FFFFFF;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 4px;
+    border-color : $color-bright !important;
+    --height : 25px;
+    --width: 25px;
+    --checkmark-color: #000000;
+    --background-checked: #FFFFFF;
+    --border-color: #FFFFFF;
+    --border-color-checked :#FFFFFF;
+  }
+
   ion-item {
     --border-color: white; // default underline color
     --highlight-color-invalid: yellow; // invalid underline color
@@ -218,7 +232,7 @@ header {
     width: 421px;
     height: 262px;
     margin: 20px auto 0 auto;
-    background-image: url("../../assets/landing/eac.png");
+    background-image: url("../../assets/landing/eac1.png");
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
